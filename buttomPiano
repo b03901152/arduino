@@ -1,0 +1,53 @@
+int In_pin_Do = 10;
+int In_pin_Re = 9;
+int In_pin_Mi = 8;
+int In_pin_Fa = 7;
+int In_pin_So = 6;
+int In_pin_La = 5;
+int In_pin_Si = 4;
+int In_pin_DoH = 3;
+int Out_pin_Phone = 2;
+int val;
+int tempo = 200;
+int Do = 1915;
+int Re = 1700;
+int Mi = 1519;
+int Fa = 1432;
+int So = 1275;
+int La = 1136;
+int Si = 1014;
+int DoH = 956;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(Out_pin_Phone,OUTPUT);
+}
+void loop()
+{
+ val = digitalRead(In_pin_Do);
+ if(val == 1) {playTone(Do,tempo); Serial.println("Do ");}
+ val = digitalRead(In_pin_Re);
+ if(val == 1) {playTone(Re,tempo); Serial.println("Re ");}
+ val = digitalRead(In_pin_Mi);
+ if(val == 1) {playTone(Mi,tempo); Serial.println("Mi ");}
+ val = digitalRead(In_pin_Fa);
+ if(val == 1) {playTone(Fa,tempo); Serial.println("Fa ");}
+ val = digitalRead(In_pin_So);
+ if(val == 1) {playTone(So,tempo); Serial.println("So ");}
+ val = digitalRead(In_pin_La);
+ if(val == 1) {playTone(La,tempo); Serial.println("La ");}
+ val = digitalRead(In_pin_Si);
+ if(val == 1) {playTone(Si,tempo); Serial.println("Si ");}
+ val = digitalRead(In_pin_DoH);
+ if(val == 1) {playTone(DoH,tempo); Serial.println("DoH ");}
+}
+void playTone(int tone, int duration)
+{
+  for(long i = 0; i < long(duration)* 1000;i += tone*2)
+  {
+    digitalWrite(Out_pin_Phone,HIGH);
+    delayMicroseconds(tone);
+    digitalWrite(Out_pin_Phone,LOW);
+    delayMicroseconds(tone);
+  }
+}  
